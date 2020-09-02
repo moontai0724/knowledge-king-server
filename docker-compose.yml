@@ -70,7 +70,7 @@ services:
     volumes:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-      - /root/.ssh/id_rsa:/root/.ssh/id_rsa:ro
+      - ./.ssh/back-end.key:/root/.ssh/id_rsa:ro
       # You can attach .env file if you need.
       # - ./back-end/.env:/app/.env:ro
 

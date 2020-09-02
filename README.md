@@ -27,9 +27,10 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 ## Set up ssh key for access private repositories
-Don't forget to add ssh key for root (if there was no key)
+Don't forget to add ssh key for access private repositories (if there was no key)
 ```shell
-sudo ssh-keygen
+ssh-keygen -f ./.ssh/back-end.key
+ssh-keygen -f ./.ssh/front-end.key
 ```
 And also, don't forget to add public ssh key to **Deploy keys** in repository settings.
 
