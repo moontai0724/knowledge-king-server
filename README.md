@@ -26,6 +26,10 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
+## Set-up Project
+### Code
+Please put your code into `~/knowledge-king-back-end`, or change path at line 54 in `docker-compose.yml` file.
+
 ## Set up ssh key for access private repositories
 Don't forget to add ssh key for access private repositories (if there was no key)
 ```shell

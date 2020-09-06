@@ -1,12 +1,10 @@
 #!/bin/sh
 
-rm -rf /app/src
-mkdir -pm 0755 /app/src
-cd /app/src
+chmod 775 /app -R
+chown node:root /app -R
+cd /app
 
-git clone git@github.com:moontai0724/knowledge-king-back-end.git .
-
-cp ../.env .
+git pull
 
 npm install
 
