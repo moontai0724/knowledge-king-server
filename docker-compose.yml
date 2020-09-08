@@ -7,7 +7,7 @@ networks:
 services:
   mysql:
     image: mysql:latest
-    container_name: mysql
+    container_name: kk-mysql
     command: --default-authentication-plugin=mysql_native_password
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
@@ -26,7 +26,7 @@ services:
 
   front-end:
     build: ./front-end
-    container_name: front-end
+    container_name: kk-front-end
     networks:
       - app
     restart: always
@@ -39,7 +39,7 @@ services:
   back-end:
     build:
       context: ./back-end
-    container_name: back-end
+    container_name: kk-back-end
     depends_on:
       - mysql
     networks:
@@ -55,7 +55,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    container_name: phpmyadmin
+    container_name: kk-phpmyadmin
     environment:
       - PMA_HOST=mysql
     depends_on:
@@ -71,7 +71,7 @@ services:
 
   nginx:
     image: nginx:latest
-    container_name: nginx
+    container_name: kk-nginx
     ports:
       - 80:80
       - 443:443
