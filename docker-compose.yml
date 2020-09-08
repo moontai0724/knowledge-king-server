@@ -40,6 +40,9 @@ services:
     build:
       context: ./back-end
     container_name: kk-back-end
+    environment:
+      # Avaliable value: default (or any value not specified below), dev, debug, prod.
+      - ENVIRONMENT=default
     depends_on:
       - mysql
     networks:

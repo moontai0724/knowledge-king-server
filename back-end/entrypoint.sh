@@ -8,4 +8,17 @@ git pull
 
 npm install
 
-npm run start
+case $ENVIRONMENT in
+  "debug" )
+    npm run start:debug
+  ;;
+  "dev" )
+    npm run start:dev
+  ;;
+  "prod" )
+    npm run start:prod
+  ;;
+  * )
+    npm run start
+  ;;
+esac
