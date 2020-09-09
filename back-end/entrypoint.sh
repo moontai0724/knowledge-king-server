@@ -1,6 +1,5 @@
 #!/bin/sh
 
-chmod 775 /app -R
 chown node:root /app -R
 cd /app
 
