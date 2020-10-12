@@ -11,9 +11,9 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
-      - MYSQL_USER=knowledge_king
-      - MYSQL_PASSWORD=secret
-      - MYSQL_DATABASE=knowledge_king
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
     networks:
       - app
     restart: always
@@ -43,7 +43,7 @@ services:
     container_name: kk-back-end
     environment:
       # Avaliable value: default (or any value not specified below), dev, debug, prod.
-      - ENVIRONMENT=debug
+      - ENVIRONMENT=${ENVIRONMENT}
     depends_on:
       - mysql
     networks:
@@ -64,9 +64,8 @@ services:
     environment:
       - PUID=0
       - PGID=0
-      - PASSWORD=knowledge-king #optional
-      - SUDO_PASSWORD=knowledge-king #optional
-      # - PROXY_DOMAIN=code-server.my.domain #optional
+      - PASSWORD=${CODE_SERVER_PASSWORD}
+      - SUDO_PASSWORD=${CODE_SERVER_PASSWORD}
     ports:
       - 443:8443
     restart: always
@@ -76,7 +75,7 @@ services:
     volumes:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-      - ./.ssh/code-server.key:/config/.ssh/id_rsa
+      - ./.ssh/code-server.key:/root/.ssh/id_rsa
       - ./code-server/data:/config/data
       - ./code-server/extensions:/config/extensions
       - ~/knowledge-king-back-end:/config/workspace
@@ -86,9 +85,9 @@ services:
     container_name: kk-phpmyadmin
     environment:
       - PMA_HOST=mysql
-      - PMA_USER=knowledge_king
-      - PMA_PASSWORD=secret
-      # - PMA_ABSOLUTE_URI=http://192.168.17.130/phpmyadmin/
+#      - PMA_USER=${MYSQL_USER}
+#      - PMA_PASSWORD=${MYSQL_PASSWORD}
+      - PMA_ABSOLUTE_URI=${PHPMYADMIN_ABSOLUTE_URI}
     depends_on:
       - mysql
     networks:

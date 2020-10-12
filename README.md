@@ -13,9 +13,9 @@ This kit includes following environments:
 Caused by single ip and port limitation, this kit is served by Nginx with reverse proxy.
 Proxied path can see following:
 ```
-├ /           -> Request will forward to front-end docker container.
-├ /api        -> Request will forward to back-end docker container.
-├ /phpmyadmin -> Request will forward to phpmyadmin docker container.
+├ /            -> Request will forward to front-end docker container.
+├ /api/        -> Request will forward to back-end docker container.
+├ /phpmyadmin/ -> Request will forward to phpmyadmin docker container.
 ```
 
 # Getting Started
@@ -37,6 +37,12 @@ ssh-keygen -f ./.ssh/back-end.key
 ssh-keygen -f ./.ssh/front-end.key
 ```
 And also, don't forget to add public ssh key to **Deploy keys** in repository settings.
+
+## Setup environment variable
+Copy example file, then edit values.
+```shell
+copy .env.example .env
+```
 
 ## Boot containers
 
