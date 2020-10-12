@@ -57,7 +57,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ./.ssh/back-end.key:/root/.ssh/id_rsa:ro
       - ~/knowledge-king-back-end:/app
-  
+
   code-server:
     image: linuxserver/code-server
     container_name: kk-code-server
@@ -67,7 +67,7 @@ services:
       - PASSWORD=${CODE_SERVER_PASSWORD}
       - SUDO_PASSWORD=${CODE_SERVER_PASSWORD}
     ports:
-      - 443:8443
+      - ${CODE_SERVER_PORT}:8443
     restart: always
     stdin_open: true
     tty: true
