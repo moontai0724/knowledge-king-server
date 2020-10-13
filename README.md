@@ -8,6 +8,7 @@ This kit includes following environments:
 - **Nginx**:latest
 - Back-end server using **node**:latest
 - Front-end server using **node**:latest
+- **code-server**:latest
 
 ## Web Path
 Caused by single ip and port limitation, this kit is served by Nginx with reverse proxy.
@@ -30,9 +31,10 @@ sudo chmod +x /usr/local/bin/docker-compose
 ### Code
 Please put your code into `~/knowledge-king-back-end`, or change path at line 54 in `docker-compose.yml` file.
 
-## Set up ssh key for access private repositories
+## Set up ssh key for access private repositories (optional now)
 Don't forget to add ssh key for access private repositories (if there was no key)
 ```shell
+mkdir ./.ssh
 ssh-keygen -f ./.ssh/back-end.key
 ssh-keygen -f ./.ssh/front-end.key
 ```
