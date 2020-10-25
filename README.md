@@ -37,6 +37,7 @@ Don't forget to add ssh key for access private repositories (if there was no key
 mkdir ./.ssh
 ssh-keygen -f ./.ssh/back-end.key
 ssh-keygen -f ./.ssh/front-end.key
+ssh-keygen -f ./.ssh/code-server.key
 ```
 And also, don't forget to add public ssh key to **Deploy keys** in repository settings.
 
