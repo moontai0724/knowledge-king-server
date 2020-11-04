@@ -14,9 +14,10 @@ This kit includes following environments:
 Caused by single ip and port limitation, this kit is served by Nginx with reverse proxy.
 Proxied path can see following:
 ```
-├ /            -> Request will forward to front-end docker container.
-├ /api/        -> Request will forward to back-end docker container.
-├ /phpmyadmin/ -> Request will forward to phpmyadmin docker container.
+├ /             -> Request will forward to front-end docker container.
+├ /api/         -> Request will forward to back-end docker container.
+├ /phpmyadmin/  -> Request will forward to phpmyadmin docker container.
+├ /code-server/ -> Request will forward to code-server docker container.
 ```
 
 # Getting Started
@@ -27,16 +28,10 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-## Set-up Project
-### Code
-Please put your code into `~/knowledge-king-back-end`, or change path at line 54 in `docker-compose.yml` file.
-
 ## Set up ssh key for access private repositories (optional now)
 Don't forget to add ssh key for access private repositories (if there was no key)
 ```shell
-mkdir ./.ssh
 ssh-keygen -f ./.ssh/back-end.key
-ssh-keygen -f ./.ssh/front-end.key
 ssh-keygen -f ./.ssh/code-server.key
 ```
 And also, don't forget to add public ssh key to **Deploy keys** in repository settings.
@@ -47,11 +42,13 @@ Copy example file, then edit values.
 copy .env.example .env
 ```
 
-## Boot containers
+## Set SSL Certificate
+To use SSL, you need to save cert as `cert.pem` and `cert.key` in `./certs`.
 
+## Boot containers
 For start all these containers, just run this command in root folder of project:
 ```shell
-docker-compose up -d --build
+sudo docker-compose up -d --build
 ```
 After about a minute, all containers should successfully booted.
 

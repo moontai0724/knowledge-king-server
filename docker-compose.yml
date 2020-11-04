@@ -42,8 +42,8 @@ services:
       context: ./back-end
     container_name: kk-back-end
     environment:
-      # Avaliable value: default (or any value not specified below), dev, debug, prod.
       - ENVIRONMENT=${ENVIRONMENT}
+      - DOMAIN=${DOMAIN}
     depends_on:
       - mysql
     networks:
@@ -56,7 +56,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
       - ./.ssh/back-end.key:/root/.ssh/id_rsa:ro
-      - ~/knowledge-king-back-end:/app
+      - ${CODE_PATH_BACKEND}:/app
 
   code-server:
     image: linuxserver/code-server
@@ -66,8 +66,8 @@ services:
       - PGID=0
       - PASSWORD=${CODE_SERVER_PASSWORD}
       - SUDO_PASSWORD=${CODE_SERVER_PASSWORD}
-    ports:
-      - ${CODE_SERVER_PORT}:8443
+    networks:
+      - app
     restart: always
     stdin_open: true
     tty: true
@@ -78,16 +78,16 @@ services:
       - ./.ssh/code-server.key:/root/.ssh/id_rsa
       - ./code-server/data:/config/data
       - ./code-server/extensions:/config/extensions
-      - ~/knowledge-king-back-end:/config/workspace
+      - ${CODE_PATH_CODE_SERVER}:/config/workspace
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     container_name: kk-phpmyadmin
     environment:
       - PMA_HOST=mysql
-#      - PMA_USER=${MYSQL_USER}
-#      - PMA_PASSWORD=${MYSQL_PASSWORD}
-      - PMA_ABSOLUTE_URI=${PHPMYADMIN_ABSOLUTE_URI}
+      - PMA_USER=${MYSQL_USER}
+      - PMA_PASSWORD=${MYSQL_PASSWORD}
+      - PMA_ABSOLUTE_URI=https://${DOMAIN}/phpmyadmin/
     depends_on:
       - mysql
     networks:
@@ -103,11 +103,12 @@ services:
     image: nginx:latest
     container_name: kk-nginx
     ports:
-      - 80:80
+      - 443:443
     depends_on:
       - front-end
       - back-end
       - phpmyadmin
+      - code-server
     networks:
       - app
     restart: always
@@ -118,3 +119,4 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./certs:/etc/nginx/certs

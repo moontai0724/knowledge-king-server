@@ -1,11 +1,13 @@
 #!/bin/sh
 
-chown node:root /app -R
+chown root:root /app -R
 cd /app
+
+npm install -g npm
 
 git pull
 
-npm install
+npm install -l
 
 case $ENVIRONMENT in
   "debug" )
