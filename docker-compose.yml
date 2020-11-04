@@ -55,49 +55,7 @@ services:
     volumes:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-      - ./.ssh/back-end.key:/root/.ssh/id_rsa:ro
       - ${CODE_PATH_BACKEND}:/app
-
-  code-server:
-    image: linuxserver/code-server
-    container_name: kk-code-server
-    environment:
-      - PUID=0
-      - PGID=0
-      - PASSWORD=${CODE_SERVER_PASSWORD}
-      - SUDO_PASSWORD=${CODE_SERVER_PASSWORD}
-    networks:
-      - app
-    restart: always
-    stdin_open: true
-    tty: true
-    user: "0:0"
-    volumes:
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
-      - ./.ssh/code-server.key:/root/.ssh/id_rsa
-      - ./code-server/data:/config/data
-      - ./code-server/extensions:/config/extensions
-      - ${CODE_PATH_CODE_SERVER}:/config/workspace
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
-    container_name: kk-phpmyadmin
-    environment:
-      - PMA_HOST=mysql
-      - PMA_USER=${MYSQL_USER}
-      - PMA_PASSWORD=${MYSQL_PASSWORD}
-      - PMA_ABSOLUTE_URI=https://${DOMAIN}/phpmyadmin/
-    depends_on:
-      - mysql
-    networks:
-      - app
-    restart: always
-    stdin_open: true
-    tty: true
-    volumes:
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
 
   nginx:
     image: nginx:latest
@@ -107,8 +65,6 @@ services:
     depends_on:
       - front-end
       - back-end
-      - phpmyadmin
-      - code-server
     networks:
       - app
     restart: always

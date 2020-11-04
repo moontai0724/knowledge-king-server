@@ -17,6 +17,7 @@ case $ENVIRONMENT in
     npm run start:dev
   ;;
   "prod" )
+    npm run build
     npm run start:prod
   ;;
   * )

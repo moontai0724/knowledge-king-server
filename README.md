@@ -4,11 +4,9 @@ This repository is an environment setup kit for Knowledge King server.
 # What's Inside?
 This kit includes following environments:
 - **MySQL**:latest
-- **phpMyAdmin**:latest
 - **Nginx**:latest
 - Back-end server using **node**:latest
 - Front-end server using **node**:latest
-- **code-server**:latest
 
 ## Web Path
 Caused by single ip and port limitation, this kit is served by Nginx with reverse proxy.
@@ -16,8 +14,6 @@ Proxied path can see following:
 ```
 ├ /             -> Request will forward to front-end docker container.
 ├ /api/         -> Request will forward to back-end docker container.
-├ /phpmyadmin/  -> Request will forward to phpmyadmin docker container.
-├ /code-server/ -> Request will forward to code-server docker container.
 ```
 
 # Getting Started
@@ -27,14 +23,6 @@ curl -sSL https://get.docker.com | sudo sh
 sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 ```
-
-## Set up ssh key for access private repositories (optional now)
-Don't forget to add ssh key for access private repositories (if there was no key)
-```shell
-ssh-keygen -f ./.ssh/back-end.key
-ssh-keygen -f ./.ssh/code-server.key
-```
-And also, don't forget to add public ssh key to **Deploy keys** in repository settings.
 
 ## Setup environment variable
 Copy example file, then edit values.
