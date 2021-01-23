@@ -1,12 +1,14 @@
 FROM node:latest
-
 EXPOSE 80
 
-RUN mkdir -p -m 0700 /root/.ssh && \
-    ssh-keyscan github.com > /root/.ssh/known_hosts
+USER node
 
-COPY ./entrypoint.sh /root/entrypoint.sh
+RUN mkdir -p -m 0700 /home/node/.ssh && \
+    ssh-keyscan github.com > /home/node/.ssh/known_hosts
 
-RUN chmod 775 /root/entrypoint.sh
+COPY --chown=node:node ./entrypoint.sh /home/node/entrypoint.sh
 
-ENTRYPOINT ["/root/entrypoint.sh"]
+RUN mkdir -p /home/node/app
+WORKDIR /home/node/app
+
+ENTRYPOINT ["sh", "/home/node/entrypoint.sh"]
