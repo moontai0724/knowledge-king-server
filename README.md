@@ -8,12 +8,22 @@ This kit includes following environments:
 - Back-end server using **node**:latest
 - Front-end server using **node**:latest
 
+For which version contains what environment, please check following table:
+
+| Package \ Version | production |
+| :---------------: | :--------: |
+|       MySQL       |    Yes     |
+|       Nginx       |    Yes     |
+|        SSL        |     No     |
+|     Back-end      |    Yes     |
+|     Front-end     |    Yes     |
+
 ## Web Path
-Caused by single ip and port limitation, this kit is served by Nginx with reverse proxy.
-Proxied path can see following:
+This kit is served by Nginx with reverse proxying by path.
+Proxied path here:
 ```
-├ /             -> Request will forward to front-end docker container.
-├ /api/         -> Request will forward to back-end docker container.
+├ /             -> Requests will forward to front-end docker container.
+├ /api/         -> Requests will forward to back-end docker container.
 ```
 
 # Getting Started
@@ -30,29 +40,22 @@ Copy example file, then edit values.
 copy .env.example .env
 ```
 
-## Set SSL Certificate
-To use SSL, you need to save cert as `cert.pem` and `cert.key` in `./certs`.
-
 ## Boot containers
 For start all these containers, just run this command in root folder of project:
 ```shell
-sudo docker-compose up -d --build
+docker-compose -f docker-compose-{version}.yml up -d --build
+```
+For example, if you decide to use `production-ssl` version, please use following command:
+```shell
+docker-compose -f docker-compose-production-ssl.yml up -d --build
 ```
 After about a minute, all containers should successfully booted.
 
-## MySQL Password
+## MySQL Root Password
 MySQL root password will generate when first-time boot up, keep watching console output for root password to access database.
 If you run **docker-compose** with `-d` parameter, will detach from containers, you won't be able to watching console output.
 
 If you missed the output, you can type this command to fetch logs from container for find database password.
 ```shell
 docker logs mysql
-```
-
-## After first boot up
-After you got password, you can press `Ctrl+C` to stop containers.
-
-For start existing containers, you can use:
-```shell
-docker-compose start
 ```

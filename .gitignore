@@ -1,5 +1,5 @@
-.vscode
 .env
 
-mysql/
-code-server/
+.vscode/
+data/
+app/

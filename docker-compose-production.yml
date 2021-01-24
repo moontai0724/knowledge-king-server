@@ -19,11 +19,12 @@ services:
     restart: always
     stdin_open: true
     tty: true
-    user: "0:0"
     volumes:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-      - ./mysql:/var/lib/mysql
+      # If you want to save your data into host, uncomment this.
+      # BUT, files will saved as root, it's not preventable.
+      # - ./data/mysql:/var/lib/mysql
 
   front-end:
     build: ./front-end
@@ -42,8 +43,8 @@ services:
       context: ./back-end
     container_name: kk-back-end
     environment:
-      - ENVIRONMENT=${ENVIRONMENT}
-      - DOMAIN=${DOMAIN}
+      - ENVIRONMENT=prod
+      - DOMAIN=${HOST}
     depends_on:
       - mysql
     networks:
@@ -51,17 +52,18 @@ services:
     restart: always
     stdin_open: true
     tty: true
-    user: "0:0"
     volumes:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-      - ${CODE_PATH_BACKEND}:/app
+      - ${CODE_PATH_BACKEND}:/home/node/app
 
   nginx:
     image: nginx:latest
     container_name: kk-nginx
+    environment: 
+      - HOST=${HOST}
     ports:
-      - 443:443
+      - 80:80
     depends_on:
       - front-end
       - back-end
@@ -73,6 +75,6 @@ services:
     volumes:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/templates/default.conf:/etc/nginx/templates/default.conf.template
+      - ./nginx/templates/production.conf:/etc/nginx/templates/production.conf.template
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./certs:/etc/nginx/certs
