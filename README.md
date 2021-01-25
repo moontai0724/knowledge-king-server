@@ -46,9 +46,15 @@ Copy example file, then edit values.
 copy .env.example .env
 ```
 
-## Set SSL Certificate (Optional)
+## Set SSL Certificate (Optional, SSL version only)
 If you're using SSL version, it's necessary to having a SSL certificate.
 To use SSL, you need to save cert as `cert.pem` and `cert.key` in `./certs`.
+
+## Setup SSH key for (Optional, Development version only)
+If you're going to development, please don't forget to generate an ssh key, and add it into repo deploy keys.
+```shell
+ssh-keygen
+```
 
 ## Boot containers
 For start all these containers, just run this command in root folder of project:
