@@ -4,9 +4,12 @@ This repository is an environment setup kit for Knowledge King server.
 # What's Inside?
 This kit includes following environments:
 - **MySQL**:latest
+- **PHPMyAdmin**:latest
 - **Nginx**:latest
-- Back-end server using **node**:latest
-- Front-end server using **node**:latest
+- front-end server using **node**:latest
+- front-end development using **code-server**:latest
+- back-end development using **code-server**:latest
+- back-end server using **node**:latest
 
 For which version contains what environment, please check following table:
 
