@@ -15,14 +15,14 @@ For which version contains what environment, please check following table:
 
 |    Package \ Version    | production | production-ssl | development | development-ssl |
 | :---------------------: | :--------: | :------------: | :---------: | :-------------: |
-|          MySQL          |    Yes     |      Yes       |     Yes     |       Yes       |
-|       PHPMyAdmin        |     No     |       No       |     Yes     |       Yes       |
-|          Nginx          |    Yes     |      Yes       |     Yes     |       Yes       |
-|           SSL           |     No     |      Yes       |     No      |       Yes       |
-|        Front-end        |    Yes     |      Yes       |     Yes     |       Yes       |
-| code-server (front-end) |     No     |       No       |     Yes     |       Yes       |
-|        Back-end         |    Yes     |      Yes       |     Yes     |       Yes       |
-| code-server (back-end)  |     No     |       No       |     Yes     |       Yes       |
+|          MySQL          |   √ Yes    |     √ Yes      |    √ Yes    |      √ Yes      |
+|       PHPMyAdmin        |    × No    |      × No      |    √ Yes    |      √ Yes      |
+|          Nginx          |   √ Yes    |     √ Yes      |    √ Yes    |      √ Yes      |
+|           SSL           |    × No    |     √ Yes      |    × No     |      √ Yes      |
+|        Front-end        |   √ Yes    |     √ Yes      |    √ Yes    |      √ Yes      |
+| code-server (front-end) |    × No    |      × No      |    √ Yes    |      √ Yes      |
+|        Back-end         |   √ Yes    |     √ Yes      |    √ Yes    |      √ Yes      |
+| code-server (back-end)  |    × No    |      × No      |    √ Yes    |      √ Yes      |
 
 ## Web Path
 This kit is served by Nginx with reverse proxying by path.
