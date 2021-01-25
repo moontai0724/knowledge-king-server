@@ -3,6 +3,8 @@ version: "3"
 networks:
   app:
     driver: bridge
+  web:
+    driver: bridge
 
 services:
   mysql:
@@ -30,7 +32,7 @@ services:
     build: ./front-end
     container_name: kk-front-end
     networks:
-      - app
+      - web
     restart: always
     stdin_open: true
     tty: true
@@ -49,6 +51,7 @@ services:
       - mysql
     networks:
       - app
+      - web
     restart: always
     stdin_open: true
     tty: true
@@ -69,7 +72,7 @@ services:
       - front-end
       - back-end
     networks:
-      - app
+      - web
     restart: always
     stdin_open: true
     tty: true
