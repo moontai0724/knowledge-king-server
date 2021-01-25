@@ -48,7 +48,7 @@ services:
     container_name: kk-back-end
     environment:
       - ENVIRONMENT=prod
-      - DOMAIN=${HOST}
+      - HOST=${HOST}
     depends_on:
       - mysql
     networks:
