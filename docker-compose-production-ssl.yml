@@ -63,6 +63,7 @@ services:
     environment: 
       - HOST=${HOST}
     ports:
+      - 80:80
       - 443:443
     depends_on:
       - front-end
