@@ -34,8 +34,6 @@ services:
       - HOST=${HOST}
     networks:
       - app
-    ports:
-      - 80:80
     restart: always
     stdin_open: true
     tty: true
