@@ -10,20 +10,26 @@ This kit includes following environments:
 
 For which version contains what environment, please check following table:
 
-| Package \ Version | production | production-ssl |
-| :---------------: | :--------: | :------------: |
-|       MySQL       |    Yes     |      Yes       |
-|       Nginx       |    Yes     |      Yes       |
-|        SSL        |     No     |      Yes       |
-|     Back-end      |    Yes     |      Yes       |
-|     Front-end     |    Yes     |      Yes       |
+|    Package \ Version    | production | production-ssl | development | development-ssl |
+| :---------------------: | :--------: | :------------: | :---------: | :-------------: |
+|          MySQL          |    Yes     |      Yes       |     Yes     |       Yes       |
+|       PHPMyAdmin        |     No     |       No       |     Yes     |       Yes       |
+|          Nginx          |    Yes     |      Yes       |     Yes     |       Yes       |
+|           SSL           |     No     |      Yes       |     No      |       Yes       |
+|        Front-end        |    Yes     |      Yes       |     Yes     |       Yes       |
+| code-server (front-end) |    Yes     |      Yes       |     Yes     |       Yes       |
+|        Back-end         |    Yes     |      Yes       |     Yes     |       Yes       |
+| code-server (back-end)  |     No     |       No       |     Yes     |       Yes       |
 
 ## Web Path
 This kit is served by Nginx with reverse proxying by path.
 Proxied path here:
 ```
-├ /             -> Requests will forward to front-end docker container.
-├ /api/         -> Requests will forward to back-end docker container.
+├ /                    -> Requests will forward to front-end docker container.
+├ /api/                -> Requests will forward to back-end docker container.
+├ /phpmyadmin/         -> Requests will forward to phpmyadmin docker container.
+├ /front-end-coding/   -> Requests will forward to front-end code-server docker container.
+├ /back-end-coding/    -> Requests will forward to back-end code-server docker container.
 ```
 
 # Getting Started
