@@ -20,7 +20,7 @@ For which version contains what environment, please check following table:
 |          Nginx          |    Yes     |      Yes       |     Yes     |       Yes       |
 |           SSL           |     No     |      Yes       |     No      |       Yes       |
 |        Front-end        |    Yes     |      Yes       |     Yes     |       Yes       |
-| code-server (front-end) |    Yes     |      Yes       |     Yes     |       Yes       |
+| code-server (front-end) |     No     |       No       |     Yes     |       Yes       |
 |        Back-end         |    Yes     |      Yes       |     Yes     |       Yes       |
 | code-server (back-end)  |     No     |       No       |     Yes     |       Yes       |
 
