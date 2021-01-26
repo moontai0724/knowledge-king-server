@@ -21,23 +21,21 @@ if [ ! -f .env ]; then
   exit
 fi
 
+yarn install
+
 # Start
 case $ENVIRONMENT in
   "debug" )
-    npm install --save-dev
-    npm run start:debug
+    yarn start:debug
   ;;
   "dev" )
-    npm install --save-dev
-    npm run start:dev
+    yarn start:dev
   ;;
   "prod" )
-    npm install
-    npm run build
-    npm run start:prod
+    yarn build
+    yarn start:prod
   ;;
   * )
-    npm install --save-dev
-    npm run start
+    yarn start
   ;;
 esac
