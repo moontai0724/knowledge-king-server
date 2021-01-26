@@ -31,6 +31,10 @@ services:
   front-end:
     build: ./front-end
     container_name: kk-front-end
+    environment:
+      - ENVIRONMENT=prod
+      - HOST=${HOST}
+      - schema=https
     networks:
       - web
     restart: always
@@ -39,6 +43,7 @@ services:
     volumes:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
+      - ${CODE_PATH_FRONTEND}:/home/node/app
 
   back-end:
     build:

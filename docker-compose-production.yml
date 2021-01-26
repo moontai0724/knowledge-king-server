@@ -34,6 +34,7 @@ services:
     environment:
       - ENVIRONMENT=prod
       - HOST=${HOST}
+      - schema=http
     networks:
       - web
     restart: always

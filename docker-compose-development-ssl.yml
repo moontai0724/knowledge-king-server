@@ -54,6 +54,7 @@ services:
     environment:
       - ENVIRONMENT=dev
       - HOST=${HOST}
+      - schema=https
     networks:
       - web
     restart: always
