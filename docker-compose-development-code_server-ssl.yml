@@ -54,7 +54,7 @@ services:
     environment:
       - ENVIRONMENT=dev
       - HOST=${HOST}
-      - schema=http
+      - schema=https
     networks:
       - web
     restart: always
@@ -64,6 +64,25 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
       - ${CODE_PATH_FRONTEND}:/home/node/app
+
+  front-end-coding:
+    image: linuxserver/code-server
+    container_name: kk-front-end-coding
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - PASSWORD=${CODE_SERVER_PASSWORD}
+      - SUDO_PASSWORD=${CODE_SERVER_PASSWORD}
+    networks:
+      - web
+    restart: always
+    stdin_open: true
+    tty: true
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/front-end-code-server:/config
+      - ${CODE_PATH_FRONTEND}:/config/workspace
 
   back-end:
     build:
@@ -85,6 +104,25 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ${CODE_PATH_BACKEND}:/home/node/app
 
+  back-end-coding:
+    image: linuxserver/code-server
+    container_name: kk-back-end-coding
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - PASSWORD=${CODE_SERVER_PASSWORD}
+      - SUDO_PASSWORD=${CODE_SERVER_PASSWORD}
+    networks:
+      - web
+    restart: always
+    stdin_open: true
+    tty: true
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/back-end-code-server:/config
+      - ${CODE_PATH_BACKEND}:/config/workspace
+
   nginx:
     image: nginx:latest
     container_name: kk-nginx
@@ -92,6 +130,7 @@ services:
       - HOST=${HOST}
     ports:
       - 80:80
+      - 443:443
     depends_on:
       - front-end
       - back-end
@@ -103,6 +142,7 @@ services:
     volumes:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-      - ./nginx/templates/default.conf:/etc/nginx/templates/default.conf.template
-      - ./nginx/templates/development.conf:/etc/nginx/templates/development.conf.template
+      - ./nginx/templates/default-ssl.conf:/etc/nginx/templates/default-ssl.conf.template
+      - ./nginx/templates/development-code_server-ssl.conf:/etc/nginx/templates/development-code_server-ssl.conf.template
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./certs:/etc/nginx/certs

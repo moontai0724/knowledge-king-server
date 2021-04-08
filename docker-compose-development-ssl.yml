@@ -65,25 +65,6 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ${CODE_PATH_FRONTEND}:/home/node/app
 
-  front-end-coding:
-    image: linuxserver/code-server
-    container_name: kk-front-end-coding
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - PASSWORD=${CODE_SERVER_PASSWORD}
-      - SUDO_PASSWORD=${CODE_SERVER_PASSWORD}
-    networks:
-      - web
-    restart: always
-    stdin_open: true
-    tty: true
-    volumes:
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
-      - ./data/front-end-code-server:/config
-      - ${CODE_PATH_FRONTEND}:/config/workspace
-
   back-end:
     build:
       context: ./back-end
@@ -103,25 +84,6 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
       - ${CODE_PATH_BACKEND}:/home/node/app
-
-  back-end-coding:
-    image: linuxserver/code-server
-    container_name: kk-back-end-coding
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - PASSWORD=${CODE_SERVER_PASSWORD}
-      - SUDO_PASSWORD=${CODE_SERVER_PASSWORD}
-    networks:
-      - web
-    restart: always
-    stdin_open: true
-    tty: true
-    volumes:
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
-      - ./data/back-end-code-server:/config
-      - ${CODE_PATH_BACKEND}:/config/workspace
 
   nginx:
     image: nginx:latest

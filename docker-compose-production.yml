@@ -24,9 +24,9 @@ services:
     volumes:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-      # If you want to save your data into host, uncomment this.
-      # BUT, files will saved as root, it's not preventable.
-      # - ./data/mysql:/var/lib/mysql
+      # If you do not want to save your data into host, comment this.
+      # Database files will saved as root, it's not preventable.
+      - ./data/mysql:/var/lib/mysql
 
   front-end:
     build: ./front-end
