@@ -50,6 +50,7 @@ services:
       context: ./back-end
     container_name: kk-back-end
     environment:
+      - NODE_ENV=production
       - ENVIRONMENT=prod
       - HOST=${HOST}
     depends_on:

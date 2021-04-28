@@ -89,6 +89,7 @@ services:
       context: ./back-end
     container_name: kk-back-end
     environment:
+      - NODE_ENV=development
       - ENVIRONMENT=debug
       - HOST=${HOST}
     depends_on:
