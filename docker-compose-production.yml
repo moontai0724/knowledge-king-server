@@ -33,8 +33,9 @@ services:
     container_name: kk-front-end
     environment:
       - ENVIRONMENT=prod
-      - HOST=${HOST}
       - schema=http
+      - HOST=${HOST}
+      - API_URL=http://${HOST}/api
     networks:
       - web
     restart: always
@@ -69,7 +70,7 @@ services:
   nginx:
     image: nginx:latest
     container_name: kk-nginx
-    environment: 
+    environment:
       - HOST=${HOST}
     ports:
       - 80:80
