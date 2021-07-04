@@ -15,6 +15,10 @@ git remote set-url origin https://github.com/moontai0724/knowledge-king-front-en
 git remote set-url --push origin git@github.com:moontai0724/knowledge-king-front-end.git
 git pull
 
+if [ ! -f ./certs/cert.key ]; then
+  openssl req -x509 -new -nodes -sha256 -utf8 -days 3650 -newkey rsa:2048 -keyout ./certs/cert.key -out ./certs/cert.crt -config /home/node/ssl.conf
+fi
+
 yarn install
 
 # Start
@@ -27,6 +31,7 @@ case $ENVIRONMENT in
   ;;
   * )
     yarn build
+    yarn generate
     yarn start
   ;;
 esac
